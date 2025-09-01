@@ -1,0 +1,174 @@
+<!-- Hero Section -->
+<section style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 3rem 0; margin-bottom: 3rem; border-radius: 8px;">
+    <div style="text-align: center;">
+        <h2 class="bengali-text" style="font-size: 2.5rem; color: var(--primary-red); margin-bottom: 1rem;">
+            আজকের সংবাদ
+        </h2>
+        <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem;">
+            সর্বশেষ ও গুরুত্বপূর্ণ সংবাদ পড়ুন
+        </p>
+        <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-red);">{{totalArticles}}</div>
+                <div class="bengali-text">মোট সংবাদ</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-red);">{{featuredArticles.length}}</div>
+                <div class="bengali-text">প্রধান সংবাদ</div>
+            </div>
+            <div style="text-align: center;">
+                <div style="font-size: 2rem; font-weight: bold; color: var(--primary-red);">{{currentDate}}</div>
+                <div class="bengali-text">আজকের তারিখ</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Articles -->
+{{#if featuredArticles.length}}
+<section style="margin-bottom: 4rem;">
+    <h2 class="bengali-text" style="color: var(--primary-red); border-bottom: 3px solid var(--primary-red); padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 2rem;">
+        🌟 প্রধান সংবাদ
+    </h2>
+    
+    <div class="article-grid">
+        {{#each featuredArticles}}
+        <article class="article-card featured">
+            <div style="margin-bottom: 1rem;">
+                <span class="category-badge bengali-text">{{category}}</span>
+                <span class="featured-badge bengali-text">প্রধান সংবাদ</span>
+            </div>
+            
+            <h3 style="margin-bottom: 0.5rem;">
+                <a href="/articles/{{id}}.html" class="article-title bengali-text">{{title}}</a>
+            </h3>
+            
+            {{#if subtitle}}
+            <h4 style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: normal;" class="bengali-text">
+                {{subtitle}}
+            </h4>
+            {{/if}}
+            
+            <div class="article-meta bengali-text">
+                <span>📝 {{author}}</span> • 
+                <span>📅 {{formatDate date}}</span>
+                {{#if views}} • <span>👁️ {{views}} বার পড়া হয়েছে</span>{{/if}}
+            </div>
+            
+            {{#if description}}
+            <p class="bengali-text" style="margin-bottom: 1.5rem; line-height: 1.6;">
+                {{truncate description 150}}
+            </p>
+            {{/if}}
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="/articles/{{id}}.html" style="background-color: var(--primary-red); color: white; padding: 0.5rem 1rem; text-decoration: none; border-radius: 4px; font-weight: 500;" class="bengali-text">
+                    বিস্তারিত পড়ুন →
+                </a>
+                {{#if pdfUrl}}
+                <a href="http://localhost:5000{{pdfUrl}}" target="_blank" style="color: var(--primary-red); text-decoration: none; font-weight: 500;" class="bengali-text">
+                    📄 PDF দেখুন
+                </a>
+                {{/if}}
+            </div>
+        </article>
+        {{/each}}
+    </div>
+</section>
+{{/if}}
+
+<!-- Regular Articles -->
+{{#if regularArticles.length}}
+<section>
+    <h2 class="bengali-text" style="color: var(--dark-gray); border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 2rem; font-size: 1.8rem;">
+        📰 অন্যান্য সংবাদ
+    </h2>
+    
+    <div class="article-grid">
+        {{#each regularArticles}}
+        <article class="article-card">
+            <div style="margin-bottom: 1rem;">
+                <span class="category-badge bengali-text">{{category}}</span>
+            </div>
+            
+            <h3 style="margin-bottom: 0.5rem;">
+                <a href="/articles/{{id}}.html" class="article-title bengali-text">{{title}}</a>
+            </h3>
+            
+            {{#if subtitle}}
+            <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; font-weight: normal;" class="bengali-text">
+                {{subtitle}}
+            </h4>
+            {{/if}}
+            
+            <div class="article-meta bengali-text">
+                <span>📝 {{author}}</span> • 
+                <span>📅 {{formatDate date}}</span>
+                {{#if views}} • <span>👁️ {{views}} বার পড়া হয়েছে</span>{{/if}}
+            </div>
+            
+            {{#if description}}
+            <p class="bengali-text" style="margin-bottom: 1.5rem; line-height: 1.6;">
+                {{truncate description 120}}
+            </p>
+            {{/if}}
+            
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="/articles/{{id}}.html" style="color: var(--primary-red); text-decoration: none; font-weight: 500;" class="bengali-text">
+                    বিস্তারিত পড়ুন →
+                </a>
+                {{#if pdfUrl}}
+                <a href="http://localhost:5000{{pdfUrl}}" target="_blank" style="color: var(--text-secondary); text-decoration: none;" class="bengali-text">
+                    📄 PDF
+                </a>
+                {{/if}}
+            </div>
+        </article>
+        {{/each}}
+    </div>
+</section>
+{{/if}}
+
+<!-- No Articles Message -->
+{{#unless totalArticles}}
+<section style="text-align: center; padding: 4rem 0;">
+    <div style="font-size: 4rem; margin-bottom: 1rem;">📰</div>
+    <h2 class="bengali-text" style="color: var(--text-secondary); margin-bottom: 1rem;">
+        এখনও কোনো সংবাদ প্রকাশিত হয়নি
+    </h2>
+    <p style="color: var(--text-secondary); font-size: 1.1rem;">
+        শীঘ্রই নতুন সংবাদ প্রকাশিত হবে। আমাদের সাথে থাকুন।
+    </p>
+</section>
+{{/unless}}
+
+<!-- Categories Section -->
+<section style="background-color: var(--light-gray); padding: 3rem 0; margin: 4rem -1rem 0 -1rem; border-radius: 8px;">
+    <div style="text-align: center; margin-bottom: 2rem;">
+        <h2 class="bengali-text" style="color: var(--dark-gray); margin-bottom: 1rem;">
+            📂 বিভাগসমূহ
+        </h2>
+        <p style="color: var(--text-secondary);">
+            আপনার পছন্দের বিষয়ের সংবাদ পড়ুন
+        </p>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; max-width: 800px; margin: 0 auto;">
+        <a href="#national" style="background: white; padding: 1.5rem; text-align: center; text-decoration: none; color: var(--text-primary); border-radius: 8px; transition: transform 0.3s ease;" class="bengali-text">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏛️</div>
+            <div style="font-weight: 500;">জাতীয়</div>
+        </a>
+        <a href="#international" style="background: white; padding: 1.5rem; text-align: center; text-decoration: none; color: var(--text-primary); border-radius: 8px; transition: transform 0.3s ease;" class="bengali-text">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">🌍</div>
+            <div style="font-weight: 500;">আন্তর্জাতিক</div>
+        </a>
+        <a href="#economy" style="background: white; padding: 1.5rem; text-align: center; text-decoration: none; color: var(--text-primary); border-radius: 8px; transition: transform 0.3s ease;" class="bengali-text">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
+            <div style="font-weight: 500;">অর্থনীতি</div>
+        </a>
+        <a href="#sports" style="background: white; padding: 1.5rem; text-align: center; text-decoration: none; color: var(--text-primary); border-radius: 8px; transition: transform 0.3s ease;" class="bengali-text">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚽</div>
+            <div style="font-weight: 500;">খেলা</div>
+        </a>
+    </div>
+</section>

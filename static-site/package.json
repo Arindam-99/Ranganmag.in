@@ -1,0 +1,19 @@
+{
+  "name": "ranganmag-static",
+  "version": "1.0.0",
+  "description": "Static site for Ranganmag articles",
+  "main": "generate.js",
+  "scripts": {
+    "generate": "node generate.js",
+    "serve": "npx http-server dist -p 8080 -c-1",
+    "build": "npm run generate && npm run serve"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "fs-extra": "^11.2.0",
+    "handlebars": "^4.7.8"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
